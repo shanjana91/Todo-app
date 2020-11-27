@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width,initial_scale=1.0">
+    <title>Todo app</title>
+
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+    <!-- jQuery library -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <!-- Latest compiled JavaScript -->
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+</head>
+<body>
+    <div style="margin-top: 25px;" class="container">
+    
+    <div class="text-center h1">THINGS TO DO 
+    </div>
+
+    <form action="/add" method="POST">
+        <div class="form-group">
+            <div class="jumbotron">
+            <label for ="inputbox" class="font-weight-bold">Todo item :</label>
+            <input class="form-control input-lg" type="text" name="inputbox" placeholder="What do you want to do ?">
+            <br>
+            <input class="btn btn-primary " type="submit" value="ADD">
+            </div>
+        </div>
+    </form>
+
+    {% for todo in todo_list %}
+        <div class=list-group-item>
+            <p class="h3">{{todo.id}} | {{todo.title}}</p>
+            {% if todo.status== False %}
+                <span class="label label-default">Not completed</span>
+            {% else %}
+                <span class="label label-success">Completed</span>
+            {% endif %}
+
+            <a class="btn btn-primary" href="/update/{{todo.id}}">Update</a>
+            <a class="btn btn-danger" href="/delete/{{todo.id}}">Delete</a>
+        </div>
+
+    {% endfor %}
+    </div>
+    </div>
+</body>
+</html>
